@@ -1,0 +1,13 @@
+.wrapper {
+    padding: 20px;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+
+    .fetchButton {
+        background-color: red;
+        height: 30px;
+        width: 60px;
+
+    }
+}
