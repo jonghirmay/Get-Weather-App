@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.scss";
 import GetWeatherReports from "./components/GetWeatherReports/GetWeatherReports";
 import GetLatestHourTemp from "./components/GetLatestHourTemp/GetLatestHourTemp";
+import GetLatestSensorData from "./components/GetLatestSensorData/GetLatestSensorData";
 
 export default function Home() {
 	return (
@@ -13,6 +14,10 @@ export default function Home() {
 
 				<div>
 					<GetLatestHourTemp/>
+				</div>
+
+				<div>
+					<GetLatestSensorData/>
 				</div>
 
       		</div>
