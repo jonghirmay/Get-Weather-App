@@ -8,30 +8,26 @@ export default function GetLatestSensorData() {
 
     const [data, setData] = useState([]);
 
-    useEffect(() => {
-      async function fetchData() {
+    async function fetchData() {
 
-        try {
+      try {
 
-          const response = await axios.get('http://localhost:5001/data')
+        const response = await axios.get('http://localhost:5001/data')
 
-          if(response && response.data) {
-            setData(response.data)
-          }
-          
-        } catch (error) {
-          console.error('Fetch error', error.message)
+        if(response && response.data) {
+          setData(response.data)
         }
+        
+      } catch (error) {
+        console.error('Fetch error', error.message)
       }
-
-      fetchData()
-
-    }, [])
+    }
 
     return(
         <div className={styles.wrapper}>
-            <h3>Data from, BigQuery</h3>
-              <h1>Temperature and Humidity Data</h1>
+            <h3>Sensor Data</h3>
+            <label>Press button and get the latest hours temp in local time.</label>
+            <button className={styles.fetchButton} onClick={fetchData}>Press</button>
             <table>
                 <thead>
                     <tr>
