@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react';
 
 const axios = require('axios');
-const styles = require('./GetLatestHourTemp.module.scss');
+const styles = require('./GetLatestHourTempHum.module.scss');
 
 
-export default function GetLatestHourTemp() {
+export default function GetLatestHourTempHum() {
 
     const version = '1.0';
     const parameter = '1';
@@ -55,6 +55,7 @@ export default function GetLatestHourTemp() {
 
     return(
         <div className={styles.wrapper}>
+            <h3>SMHI API Data</h3>
             <label>Press button and get the latest hours temp in local time.</label>
             <button className={styles.fetchButton} onClick={fetchData}>Press</button>    
             <p>Date & Time: {latestTempReport.dateTime}</p>
