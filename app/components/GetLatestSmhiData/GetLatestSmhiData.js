@@ -16,7 +16,7 @@ export default function GetLatestSmhiData() {
 
       try {
 
-        const response = await axios.get('http://localhost:3001/api/smhi-data')
+        const response = await axios.get('/api/combined-data')
 
         if(response && response.data) {
           setData(response.data)
@@ -60,31 +60,10 @@ export default function GetLatestSmhiData() {
             {displayData && (
                 <div>
                     <p>Timestamp: {displayData.timestamp}</p>
-                    <p>Temperature: {displayData.temperature} °C</p>
-                    <p>Humidity: {displayData.humidity} %</p>
+                    <p>Temperature: {displayData.smhi_data.temperature} °C</p>
+                    <p>Humidity: {displayData.smhi_data.humidity} %</p>
                 </div>
             )}
-            {/* <label>Press button and get the latest temp in local time.</label>    
-            <button className={styles.fetchButton} onClick={fetchData}>Press</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Temperature (°C)</th>
-                        <th>Humidity (%)</th>
-                        <th>Timestamp</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <label>All data</label>
-                    {data.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.temperature}</td>
-                            <td>{item.humidity}</td>
-                            <td>{item.timestamp}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table> */}
         </div>
     )
 

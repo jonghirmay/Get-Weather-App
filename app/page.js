@@ -3,6 +3,7 @@ import styles from "./page.module.scss";
 import GetLatestHourTempHum from "./components/GetLatestHourTempHum/GetLatestHourTempHum";
 import GetLatestSensorData from "./components/GetLatestSensorData/GetLatestSensorData";
 import GetLatestSmhiData from "./components/GetLatestSmhiData/GetLatestSmhiData";
+import GetForecast from "./components/GetForecast/GetForecast";
 
 export default function Home() {
 	return (
@@ -19,6 +20,10 @@ export default function Home() {
 
 				<div>
 					<GetLatestSmhiData/>
+				</div>
+
+				<div>
+					<GetForecast/>
 				</div>
 
       		</div>

@@ -9,30 +9,46 @@ const styles = require('./GetLatestHourTempHum.module.scss');
 export default function GetLatestHourTempHum() {
 
     const version = '1.0';
-    const parameter = '1';
+    const tempParameter = '1';
+    const humidityParameter = '6'
     const measuringStations = '97100'; // Tullinge
-    const baseUrl = `https://opendata-download-metobs.smhi.se/api/version/${version}/parameter/${parameter}/station/${measuringStations}/period/latest-hour/data.json`;
-
+    const tempUrl = `https://opendata-download-metobs.smhi.se/api/version/${version}/parameter/${tempParameter}/station/${measuringStations}/period/latest-hour/data.json`;
+    const humidityUrl = `https://opendata-download-metobs.smhi.se/api/version/${version}/parameter/${humidityParameter}/station/${measuringStations}/period/latest-hour/data.json`
 
 
 
     const [latestTempReport, setLatestTempReport] = useState({ dateTime: '', temp: ''})
+    const [latestHumidityReport, setLatestHumidityReport] = useState({humidity: ''})
+
+
+    const fetchHumidity = async () => {
+
+        const response = await axios.get(humidityUrl)
+
+        if(response.data && response.data.value.length > 0) {
+            const humidity = `${response.data.value[0].value}`
+            setLatestHumidityReport({humidity: humidity})
+
+            return latestHumidityReport
+        }else {
+            console.log('No humidity data available')
+        }
+    }
 
 
 
-        const fetchData = async () => {
-
-
+        const fetchTemp = async () => {
 
             try {
-                const response = await axios.get(baseUrl);
+                const response = await axios.get(tempUrl);
                 if(response.data && response.data.value.length > 0) {
 
                     const latestTempTime = new Date(response.data.value[0].date).toLocaleTimeString();
                     const latestTempDate = new Date(response.data.value[0].date).toLocaleDateString();
                     
                     const dateAndTime = `${latestTempDate} - ${latestTempTime}`
-                    const temperature =  `${response.data.value[0].value}`
+                    const temperature =  `${response.data.value[0].value} °C`
+                    const humidity = `${fetchHumidity()}%`
                     setLatestTempReport({dateTime: dateAndTime, temp: temperature})
 
 
@@ -51,15 +67,17 @@ export default function GetLatestHourTempHum() {
 
 
 
+
     
 
     return(
         <div className={styles.wrapper}>
             <h3>SMHI API Data</h3>
-            <label>Press button and get the latest hours temp in local time.</label>
-            <button className={styles.fetchButton} onClick={fetchData}>Press</button>    
+            <label>Press button and get the current hours temp in local time.</label>
+            <button className={styles.fetchButton} onClick={fetchTemp}>Press</button>    
             <p>Date & Time: {latestTempReport.dateTime}</p>
             <p>Temperature: {latestTempReport.temp}</p>
+            <p>Humidity: {latestHumidityReport.humidity}</p>
         </div>
     )
 

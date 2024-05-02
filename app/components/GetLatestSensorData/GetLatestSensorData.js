@@ -15,7 +15,7 @@ export default function GetLatestSensorData() {
 
       try {
 
-        const response = await axios.get('http://localhost:3001/api/sensor-data')
+        const response = await axios.get('/api/combined-data')
 
         if(response && response.data) {
           setData(response.data)
@@ -59,8 +59,8 @@ export default function GetLatestSensorData() {
             {displayData && (
                 <div>
                     <p>Timestamp: {displayData.timestamp}</p>
-                    <p>Temperature: {displayData.temperature} °C</p>
-                    <p>Humidity: {displayData.humidity} %</p>
+                    <p>Temperature: {displayData.sensor_data.temperature} °C</p>
+                    <p>Humidity: {displayData.sensor_data.humidity} %</p>
                 </div>
             )}
         </div>
