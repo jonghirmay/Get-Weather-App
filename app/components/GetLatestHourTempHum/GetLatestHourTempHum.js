@@ -26,7 +26,7 @@ export default function GetLatestHourTempHum() {
         const response = await axios.get(humidityUrl)
 
         if(response.data && response.data.value.length > 0) {
-            const humidity = `${response.data.value[0].value}`
+            const humidity = `${response.data.value[0].value}%`
             setLatestHumidityReport({humidity: humidity})
 
             return latestHumidityReport
@@ -46,9 +46,9 @@ export default function GetLatestHourTempHum() {
                     const latestTempTime = new Date(response.data.value[0].date).toLocaleTimeString();
                     const latestTempDate = new Date(response.data.value[0].date).toLocaleDateString();
                     
-                    const dateAndTime = `${latestTempDate} - ${latestTempTime}`
-                    const temperature =  `${response.data.value[0].value} °C`
-                    const humidity = `${fetchHumidity()}%`
+                    const dateAndTime = latestTempTime
+                    const temperature =  `${response.data.value[0].value}°C`
+                    const humidity = `${fetchHumidity()}`
                     setLatestTempReport({dateTime: dateAndTime, temp: temperature})
 
 
@@ -72,12 +72,24 @@ export default function GetLatestHourTempHum() {
 
     return(
         <div className={styles.wrapper}>
-            <h3>SMHI API Data</h3>
-            <label>Press button and get the current hours temp in local time.</label>
+            <h3>Current Weather</h3>
             <button className={styles.fetchButton} onClick={fetchTemp}>Press</button>    
-            <p>Date & Time: {latestTempReport.dateTime}</p>
-            <p>Temperature: {latestTempReport.temp}</p>
-            <p>Humidity: {latestHumidityReport.humidity}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Temperature</th>
+                        <th>Humidity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>{latestTempReport.dateTime}</td>
+                            <td>{latestTempReport.temp}</td>
+                            <td>{latestHumidityReport.humidity}</td>
+                        </tr>
+                </tbody>
+            </table>
         </div>
     )
 

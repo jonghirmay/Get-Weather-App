@@ -1,6 +1,5 @@
-
 'use client'
-const styles = require('./GetLatestSensorData.module.scss');
+const styles = require('./CompareTempHum.module.scss')
 import React, { useEffect, useState } from 'react';
 const axios = require('axios')
 
@@ -15,7 +14,7 @@ export default function GetLatestSensorData() {
 
       try {
 
-        const response = await axios.get('/api/combined-data')
+        const response = await axios.get('http://localhost:5003/api/data')
 
         if(response && response.data) {
           setData(response.data)
@@ -45,7 +44,7 @@ export default function GetLatestSensorData() {
 
     return(
         <div className={styles.wrapper}>
-            <h3>Sensor Data</h3>
+            <h3>Temperature and humidity Data</h3>
             <div>
                 <label htmlFor={styles.dataSelect}>Choose timestamp</label>
                 <select id={styles.dataSelect} onChange={handleTimeStampChange}>
@@ -56,15 +55,33 @@ export default function GetLatestSensorData() {
                 ))}
                 </select>
             </div>
-            {displayData && (
+            <div className={styles.resultsDiv}>
                 <div>
-                    <p>Timestamp: {displayData.timestamp}</p>
-                    <p>Temperature: {displayData.sensor_data.temperature} °C</p>
-                    <p>Humidity: {displayData.sensor_data.humidity} %</p>
+                {displayData && (
+                    <div>
+                        <h4>Outside Weather data stored from SMHI</h4>
+                        <p><b>Timestamp:</b> {displayData.timestamp}</p>
+                        <p><b>Temperature:</b> {displayData.smhi_data.temperature} °C </p>
+                        <p><b>Humidity:</b> {displayData.smhi_data.humidity} %</p>
+                    </div>
+                )}
                 </div>
-            )}
+                <div>
+                {displayData && (
+                    <div>
+                        <h4>Sensor data from inside my bedroom</h4>
+                        <p><b>Timestamp:</b> {displayData.timestamp}</p>
+                        <p><b>Temperature:</b> {displayData.sensor_data.temperature} °C </p>
+                        <p><b>Humidity:</b> {displayData.sensor_data.humidity} %</p>
+                    </div>
+                )}
+
+                </div>
+            </div>
+
+
         </div>
     )
 
-
+    
 }

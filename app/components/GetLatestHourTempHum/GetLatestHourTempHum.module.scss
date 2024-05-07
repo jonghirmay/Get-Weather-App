@@ -1,6 +1,5 @@
 .wrapper {
-    height: 450px;
-    padding: 20px;
+    padding-top: 20px;
     display: flex;
     align-content: center;
     flex-direction: column;
@@ -13,4 +12,11 @@
         width: 60px;
 
     }
+
+    td {
+        padding-top:10px;
+        width: 60px;
+        box-shadow:  0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
 }

@@ -31,13 +31,10 @@ export default function GetLatestSmhiData() {
         const timestamp = event.target.value;
         const selectedData = data.find(item => item.timestamp === timestamp);
         setSelectedTimestamp(selectedData);
+        setDisplayData(selectedData)
     }
 
-    const handleDisplayData = () => {
-        if(selectedTimeStamp) {
-            setDisplayData(selectedTimeStamp);
-        }
-    }
+
 
     useEffect(() => {
         fetchData();
@@ -55,7 +52,6 @@ export default function GetLatestSmhiData() {
                     </option>
                 ))}
                 </select>
-                <button onClick={handleDisplayData}>Press</button>
             </div>
             {displayData && (
                 <div>

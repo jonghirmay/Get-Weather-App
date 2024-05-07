@@ -4,28 +4,15 @@ import GetLatestHourTempHum from "./components/GetLatestHourTempHum/GetLatestHou
 import GetLatestSensorData from "./components/GetLatestSensorData/GetLatestSensorData";
 import GetLatestSmhiData from "./components/GetLatestSmhiData/GetLatestSmhiData";
 import GetForecast from "./components/GetForecast/GetForecast";
+import CompareTempHum from "./components/CompareTempHum/CompareTempHum"
+
 
 export default function Home() {
 	return (
     	<main className={styles.main}>
       		<div className={styles.wrapper}>
-
-				<div>
-					<GetLatestHourTempHum/>
-				</div>
-
-				<div>
-					<GetLatestSensorData/>
-				</div>
-
-				<div>
-					<GetLatestSmhiData/>
-				</div>
-
-				<div>
-					<GetForecast/>
-				</div>
-
+			  	<GetForecast/>
+				<CompareTempHum/>
       		</div>
     	</main>
   	);
