@@ -5,9 +5,10 @@ const styles = require('./GetForecast.module.scss')
 import axios from 'axios';
 
 export default function GetForecast() {
-    const [forecastData, setForecastData] = useState([]);
-    const [currentData, setCurrentData] = useState('')
+    const [forecastData, setForecastData] = useState([]); 
+    const [currentData, setCurrentData] = useState('') 
 
+    // fetches data from the 'smhi open api'
     const fetchForecast = async () => {
         const url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/16.158/lat/58.5812/data.json';
         try {
@@ -24,7 +25,7 @@ export default function GetForecast() {
                 humidity: data.timeSeries[0].parameters[15].values[0]
             }
 
-            setCurrentData(currentTime)
+            setCurrentData(currentTime)// Updates the value with the latest fetched forecastdata
 
             let fullData = [];
 
@@ -42,7 +43,7 @@ export default function GetForecast() {
                 fullData.push(forecastTime);
             }
 
-            setForecastData(fullData); // Update the state with the fetched data
+            setForecastData(fullData); // Updates the array with fetched forecastdata
         } catch (error) {
             console.error('Failed to fetch forecast:', error);
         }   

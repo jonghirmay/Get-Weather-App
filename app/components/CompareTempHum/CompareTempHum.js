@@ -5,17 +5,18 @@ const axios = require('axios')
 
 export default function GetLatestSensorData() {
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([]); // 
     const [selectedTimeStamp, setSelectedTimestamp] = useState(null)
     const [displayData, setDisplayData] = useState(null)
     
-
+    // fetches data from the node backend
     async function fetchData() {
 
       try {
 
         const response = await axios.get('http://localhost:5003/api/data')
 
+        // sets useState data = response.data
         if(response && response.data) {
           setData(response.data)
         }
@@ -38,8 +39,9 @@ export default function GetLatestSensorData() {
     //     }
     // }
 
+
     useEffect(() => {
-        fetchData();
+        fetchData();    //Empty dependency array to ensure this effect runs only once after initial render
     }, [])
 
     return(
