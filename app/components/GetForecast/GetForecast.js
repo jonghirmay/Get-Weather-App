@@ -29,7 +29,7 @@ export default function GetForecast() {
 
             let fullData = [];
 
-            for (let i = 1; i < 13; i++) {
+            for (let i = 1; i < 13; i++) { 
                 const rawDate = new Date(data.timeSeries[i].validTime)
 
                 const formattedDate = rawDate.toLocaleTimeString()

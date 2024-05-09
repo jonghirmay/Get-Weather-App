@@ -9,6 +9,41 @@
     background-color: white;
     color: black;
 
+    h3 {
+        margin-bottom: 20px;
+    }
+
+    h4 {
+        color: red;
+    }
+
+    .currentResultsDiv {
+        margin-top: 26px;
+        display: flex;
+        align-content: center;
+        flex-direction: row;
+        box-shadow:  0 4px 8px rgba(0, 0, 0, 0.08);
+        position: relative;
+        h4 {
+            padding-bottom: 10px;
+        }
+
+        &::before{
+            content: "";
+            position: absolute;
+            height: calc(100% - 60px);
+            top: 30px;
+            left: 50%;
+            width: 1px;
+            background-color: rgb(237, 237, 237);
+        }
+
+        div {
+            width: 100%;
+            padding: 24px 16px;
+        }
+    }
+
     .resultsDiv {
         margin-top: 26px;
         display: flex;
