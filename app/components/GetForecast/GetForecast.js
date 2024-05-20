@@ -10,7 +10,7 @@ export default function GetForecast() {
 
     // fetches data from the 'smhi open api'
     const fetchForecast = async () => {
-        const url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/16.158/lat/58.5812/data.json';
+        const url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/17.548/lat/59.1637/data.json';
         try {
             const response = await axios.get(url);
             const data = response.data;
@@ -21,9 +21,10 @@ export default function GetForecast() {
 
             const currentTime = {
                 day: currentFormattedDate,
-                temperature: data.timeSeries[0].parameters[10].values[0],
-                humidity: data.timeSeries[0].parameters[15].values[0]
+                temperature: data.timeSeries[0].parameters[0].values,
+                humidity: data.timeSeries[0].parameters[5].values
             }
+            console.log(currentTime)
 
             setCurrentData(currentTime)// Updates the value with the latest fetched forecastdata
 
@@ -37,10 +38,11 @@ export default function GetForecast() {
 
                 let forecastTime = {
                     day: formattedDate,
-                    temperature: data.timeSeries[i].parameters[10].values[0],
-                    humidity: data.timeSeries[i].parameters[15].values[0]
+                    temperature: data.timeSeries[i].parameters[0].values,
+                    humidity: data.timeSeries[i].parameters[5].values
                 };
                 fullData.push(forecastTime);
+                console.log(fullData)
             }
 
             setForecastData(fullData); // Updates the array with fetched forecastdata
