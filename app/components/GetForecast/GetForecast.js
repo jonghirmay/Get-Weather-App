@@ -25,7 +25,7 @@ export default function GetForecast() {
                 humidity: data.timeSeries[0].parameters[5].values
             }
             console.log(currentTime)
-
+            
             setCurrentData(currentTime)// Updates the value with the latest fetched forecastdata
 
             let fullData = [];
